@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEMSALDO - Casino Streamer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-green: #39ff14;
+            --neon-pink: #ff10f0;
+            --neon-blue: #00d4ff;
+            --neon-yellow: #fffc00;
+            --dark-bg: #0a0a0f;
+            --card-bg: #141420;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 16, 240, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            animation: bgShift 20s ease infinite;
+            z-index: -1;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden;
+            border-bottom: 2px solid var(--neon-blue);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--neon-blue) 20%, 
+                var(--neon-pink) 50%, 
+                var(--neon-green) 80%, 
+                transparent 100%);
+            animation: lineGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes lineGlow {
+            0%, 100% { opacity: 0.5; transform: scaleX(0.8); }
+            50% { opacity: 1; transform: scaleX(1); }
+        }
+
+        .logo-container {
+            position: relative;
+            margin-bottom: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .main-logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--neon-blue);
+            box-shadow: 
+                0 0 40px rgba(0, 212, 255, 0.6),
+                0 0 80px rgba(0, 212, 255, 0.4),
+                inset 0 0 40px rgba(255, 255, 255, 0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
+                border-color: var(--neon-blue);
+            }
+            50% { 
+                transform: scale(1.05); 
+                box-shadow: 0 0 60px rgba(0, 212, 255, 0.8);
+                border-color: var(--neon-green);
+            }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            animation: slideDown 1s ease-out;
+            text-shadow: 0 0 40px rgba(57, 255, 20, 0.5);
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #aaa;
+            margin-bottom: 3rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--neon-blue);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .social-btn:hover::before {
+            left: 100%;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
+            border-color: var(--neon-green);
+        }
+
+        .social-btn.twitch { border-color: #9146ff; }
+        .social-btn.twitch:hover { box-shadow: 0 10px 30px rgba(145, 70, 255, 0.5); }
+
+        .social-btn.youtube { border-color: #ff0000; }
+        .social-btn.youtube:hover { box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5); }
+
+        .social-btn.instagram { border-color: #e1306c; }
+        .social-btn.instagram:hover { box-shadow: 0 10px 30px rgba(225, 48, 108, 0.5); }
+
+        .social-btn.twitter { border-color: #1da1f2; }
+        .social-btn.twitter:hover { box-shadow: 0 10px 30px rgba(29, 161, 242, 0.5); }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+        }
+        .offers-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #888;
+            margin-bottom: 4rem;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .offer-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            animation: cardAppear 0.8s ease-out backwards;
+        }
+
+        .offer-card:nth-child(1) { animation-delay: 0.1s; }
+        .offer-card:nth-child(2) { animation-delay: 0.2s; }
+        .offer-card:nth-child(3) { animation-delay: 0.3s; }
+        .offer-card:nth-child(4) { animation-delay: 0.4s; }
+        .offer-card:nth-child(5) { animation-delay: 0.5s; }
+        .offer-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes cardAppear {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .offer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(255, 16, 240, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .offer-card:hover::before {
+            opacity: 1;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.4);
+        }
+
+        .casino-logo {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #1e1e2e, #2a2a3e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .offer-content {
+            padding: 2rem;
+        }
+
+        .casino-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+        }
+
+        .bonus-tag {
+            display: inline-block;
+            background: var(--gradient-2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .offer-details {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .offer-details strong {
+            color: var(--neon-green);
+            font-weight: 700;
+        }
+
+        .claim-btn {
+            display: block;
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+            border: none;
+            border-radius: 50px;
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 900;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+        }
+
+        .claim-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .claim-btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .claim-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(57, 255, 20, 0.6);
+        }
+
+        .claim-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .scroll-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: fadeIn 2s ease-out, bounce 2s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .scroll-arrow:hover {
+            transform: scale(1.1);
+        }
+
+        .scroll-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: var(--neon-green);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .arrow-icon {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--neon-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
+        }
+
+        .arrow-icon::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-right: 3px solid var(--neon-green);
+            border-bottom: 3px solid var(--neon-green);
+            transform: rotate(45deg) translateY(-3px);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .social-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="logo-container">
+            <img src="logo.jpg" alt="SEMSALDO Logo" class="main-logo">
+        </div>
+        <h1>SEMSALDO</h1>
+        <p class="subtitle">🎰 Casino Streamer • Ofertas Exclusivas</p>
+        
+        <div class="social-links">
+            <a href="https://twitch.tv/sem_saldo" class="social-btn twitch" target="_blank">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
+                </svg>
+                <span>Twitch</span>
+            </a>
+            <a href="https://www.instagram.com/semsaldo_?igsh=aHh5amVxOTloaWYx&utm_source=qr" class="social-btn instagram" target="_blank">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+                <span>Instagram</span>
+            </a>
+			<a href="https://discord.gg/KtKJWy2wzp" class="social-btn discord" target="_blank">
+			<svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+				<path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.078.037c-.211.375-.444.864-.608 1.249a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.249.077.077 0 0 0-.078-.037 19.736 19.736 0 0 0-4.885 1.515.069.069 0 0 0-.032.027C.533 9.045-.32 13.579.099 18.057a.082.082 0 0 0 .031.056 19.911 19.911 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.873-1.295 1.226-1.994a.076.076 0 0 0-.041-.105 13.201 13.201 0 0 1-1.872-.9.077.077 0 0 1-.008-.128c.126-.094.252-.192.371-.291a.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.245.198.372.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.899.077.077 0 0 0-.04.106c.36.698.772 1.363 1.225 1.993a.076.076 0 0 0 .084.028 19.86 19.86 0 0 0 6.002-3.03.077.077 0 0 0 .03-.055c.5-5.177-.838-9.673-3.548-13.66a.061.061 0 0 0-.031-.03z"/>
+			</svg>
+			<span>Discord</span>
+			</a>
+        </div>
+
+        <div class="scroll-arrow" id="scrollArrow">
+            <span class="scroll-text">Ver Ofertas</span>
+            <div class="arrow-icon"></div>
+        </div>
+    </section>
+    <section class="offers-section">
+        <h2 class="section-title">Ofertas Exclusivas</h2>
+        <p class="section-subtitle">As melhores ofertas de casinos online selecionadas para ti</p>
+        
+        <div class="offers-grid">
+            <!-- Casabet -->
+            <div class="offer-card reveal">
+                <div class="casino-logo">
+                    <img src="cb-500x500.png" alt="Casabet" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="offer-content">
+                    <h3 class="casino-name">Casabet</h3>
+                    <span class="bonus-tag">💰 BÓNUS EXCLUSIVO</span>
+
+                    <div class="offer-details">
+                        <strong>Bónus:</strong><br> 400% de depósito até 2.220€ + 350RG<br>
+						300% de depósito até 100€ em apostas desportivas<br><br>
+						<div class="instant-info">⚡ Levantamentos instantâneos</div>
+                    </div>
+
+                    <a href="https://partners.meratrack.xyz/click?o=377&a=1078" class="claim-btn"><span>🎁 Reclamar Oferta</span></a>
+                </div>
+            </div>
+
+            <!-- Leonbet -->
+            <div class="offer-card reveal">
+                <div class="casino-logo">
+                    <img src="lb-500x500.png" alt="Leonbet" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="offer-content">
+                    <h3 class="casino-name">Leonbet</h3>
+                    <span class="bonus-tag">🎁 SUPER BÓNUS</span>
+
+                    <div class="offer-details">
+                        <strong>Bónus:</strong><br>  Dobro do depósito até 1.000€ + 30RG<br>
+						10 Apostas Grátis até 100€<br><br>
+						<div class="instant-info">⚡ Levantamentos instantâneos</div>
+                    </div>
+
+                    <a href="https://partners.meratrack.xyz/click?o=378&a=1078" class="claim-btn"><span>🎁 Reclamar Oferta</span></a>
+                </div>
+            </div>
+
+            <!-- Lollyspins -->
+            <div class="offer-card reveal">
+                <div class="casino-logo">
+                    <img src="ls-500x500.jpg" alt="Lollyspins" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="offer-content">
+                    <h3 class="casino-name">Lollyspins</h3>
+                    <span class="bonus-tag">⚡ MEGA SPINS</span>
+
+                    <div class="offer-details">
+                        <strong>Bónus:</strong><br>400% de depósito até 2.220€ + 350RG<br>
+						Cashback até 30%<br><br>
+						<div class="instant-info">⚡ Levantamentos instantâneos</div>
+                    </div>
+
+                    <a href="https://partners.meratrack.xyz/click?o=380&a=1078" class="claim-btn"><span>🎁 Reclamar Oferta</span></a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+<footer>
+  <p>⚠️ Jogue com responsabilidade. +18 anos. Aplicam-se termos e condições.</p>
+
+  <p style="margin-top: 1rem;">
+    © 2026 SEMSALDO - Todos os direitos reservados
+  </p>
+
+  <p style="margin-top: 0.6rem; font-size: 0.9rem; opacity: 0.85;">
+    Projeto verificado em parceria com 
+    <a href="https://portugalcasinosonline.pt" target="_blank" rel="noopener">
+      PortugalCasinosOnline.pt
+    </a> 
+    e 
+    <a href="https://meragaming.com" target="_blank" rel="noopener">
+      MeraGaming
+    </a>.
+  </p>
+</footer>
+
+    <script>
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', reveal);
+        reveal();
+        const scrollArrow = document.getElementById('scrollArrow');
+        const offersSection = document.querySelector('.offers-section');
+        setTimeout(() => {
+            offersSection.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }, 2000);
+        scrollArrow.addEventListener('click', () => {
+            offersSection.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        });
+    </script>
+</body>
+</html>
