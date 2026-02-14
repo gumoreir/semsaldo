@@ -482,6 +482,42 @@
             opacity: 1;
             transform: translateY(0);
         }
+		/* Adicione esta regra junto com as outras cores dos botões sociais */
+.social-btn.telegram { 
+    border-color: #0088cc; 
+}
+
+.social-btn.telegram:hover { 
+    box-shadow: 0 10px 30px rgba(0, 136, 204, 0.5); 
+}
+.mobile-only-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #ff10f0, #ff6b9d);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 5px 20px rgba(255, 16, 240, 0.5);
+    z-index: 10;
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 5px 20px rgba(255, 16, 240, 0.5);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(255, 16, 240, 0.7);
+    }
+}
     </style>
 </head>
 <body>
@@ -511,6 +547,12 @@
 			</svg>
 			<span>Discord</span>
 			</a>
+			<a href="" class="social-btn telegram" target="_blank">
+    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+    </svg>
+    <span>Telegram</span>
+</a>
         </div>
 
         <div class="scroll-arrow" id="scrollArrow">
@@ -579,7 +621,24 @@
                     <a href="https://partners.meratrack.xyz/click?o=380&a=1078" class="claim-btn"><span>🎁 Reclamar Oferta</span></a>
                 </div>
             </div>
+<div class="offer-card reveal">
+    <div class="mobile-only-badge">📱 ONLY MOBILE</div>
+    <div class="casino-logo">
+        <img src="ms-500x500.webp" alt="MagneticSlots" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div class="offer-content">
+        <h3 class="casino-name">MagneticSlots</h3>
+        <span class="bonus-tag">⚡ MEGA SPINS</span>
 
+        <div class="offer-details">
+            <strong>Bónus:</strong><br>100% de depósito até 1.500€ + 250RG<br>
+            Cashback até 25%<br><br>
+            <div class="instant-info">⚡ Levantamentos instantâneos</div>
+        </div>
+
+        <a href="https://partners.meratrack.xyz/click?o=409&a=1078" class="claim-btn"><span>🎁 Reclamar Oferta</span></a>
+    </div>
+</div>
         </div>
     </section>
 
